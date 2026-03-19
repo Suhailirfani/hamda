@@ -1,0 +1,210 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<!-- Hero Carousel -->
+<section id="home" class="relative">
+    <div id="heroCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel">
+        <div class="carousel-indicators z-20">
+            <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="0" class="active"></button>
+            <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="1"></button>
+            <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="2"></button>
+        </div>
+        <div class="carousel-inner">
+            <!-- Slide 1 -->
+            <div class="carousel-item active">
+                <div class="maroon-overlay"></div>
+                <img src="{% static 'images/hero1.png' %}" class="d-block w-100 h-100 object-cover" alt="Academy">
+                <div class="carousel-caption text-center container">
+                    <div class="animate-fade-in-up">
+                        <span class="badge bg-maroon mb-3 px-3 py-2 fs-6">PREMIUM GIRLS INSTITUTE</span>
+                        <h1 class="display-2 font-serif fw-bold mb-4 text-white">Developing <span class="text-gold">Scientific Minds</span></h1>
+                        <p class="fs-4 mb-5 text-slate-200">Excellence, Ethics, and Empowerment</p>
+                        <div class="d-flex gap-3 hero-btns justify-content-center">
+                            <a href="#about" class="btn btn-maroon text-white px-4 py-2 rounded-pill fs-5 shadow-lg">Discover More</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Slide 2 -->
+            <div class="carousel-item">
+                <div class="maroon-overlay"></div>
+                <img src="{% static 'images/hero2.png' %}" class="d-block w-100 h-100 object-cover" alt="Science Lab">
+                <div class="carousel-caption text-center">
+                    <div class="animate-fade-in-up">
+                        <h2 class="display-3 font-serif fw-bold mb-4 text-white">Integrated <span class="text-gold">NEET & JEE</span> Success</h2>
+                        <p class="fs-4 mb-5 text-slate-200">Bridging the gap between board exams and competitive success.</p>
+                        <a href="#courses" class="btn btn-outline-light px-5 py-3 rounded-pill fs-5 shadow-lg">Our Programs</a>
+                    </div>
+                </div>
+            </div>
+            <!-- Slide 3 -->
+            <div class="carousel-item">
+                <div class="maroon-overlay"></div>
+                <img src="{% static 'images/hero3.png' %}" class="d-block w-100 h-100 object-cover" alt="Campus">
+                <div class="carousel-caption text-center container">
+                    <div class="animate-fade-in-up">
+                        <h2 class="display-3 font-serif fw-bold mb-4 text-white">Safe & Secure <span class="text-gold">Campus</span></h2>
+                        <p class="fs-4 mb-5 text-slate-200">Thazhapra, Cheruthuruthy, Thrissur</p>
+                        <a href="#contact" class="btn btn-gold text-maroon px-5 py-3 rounded-pill fw-bold fs-5 shadow-lg">Join Our Academy</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <button class="carousel-control-prev z-20" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon"></span>
+        </button>
+        <button class="carousel-control-next z-20" type="button" data-bs-target="#heroCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon"></span>
+        </button>
+    </div>
+</section>
+
+<!-- Stats Section -->
+<section class="py-12 bg-white shadow-sm -mt-20 relative z-10 container rounded-2xl">
+    <div class="row text-center g-4">
+        <div class="col-md-4">
+            <h2 class="display-4 fw-bold text-maroon">100%</h2>
+            <p class="text-muted">Result Oriented Coaching</p>
+        </div>
+        <div class="col-md-4">
+            <h2 class="display-4 fw-bold text-maroon">NEET/JEE</h2>
+            <p class="text-muted">Integrated Curriculum</p>
+        </div>
+        <div class="col-md-4">
+            <h2 class="display-4 fw-bold text-maroon">Girls Only</h2>
+            <p class="text-muted">Premium Safe Campus</p>
+        </div>
+    </div>
+</section>
+
+<!-- About Section -->
+<section id="about" class="py-24 bg-white">
+    <div class="container">
+        <div class="row align-items-center g-5">
+            <div class="col-lg-6">
+                <div class="p-4 bg-slate-100 rounded-3xl overflow-hidden shadow-xl">
+                    <img src="{% static 'images/classroom.png' %}" alt="Students" class="img-fluid rounded-2xl w-full">
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <span class="text-maroon fw-bold tracking-widest uppercase mb-2 block">Our Vision</span>
+                <h2 class="display-4 font-serif fw-bold mb-4">Empowering the Future Women Scientists</h2>
+                <p class="lead text-muted mb-4">Hamda Science Academy is more than just a school. Located at Thazhapra, Cheruthuruthy, we provide a holistic environment specifically designed for female students to excel in plus-two science and competitive entrances.</p>
+                <ul class="list-unstyled mb-8">
+                    <li class="mb-3 d-flex align-items-center"><i class="fas fa-check-circle text-maroon me-3"></i> Expert Faculty from Premiere Institutions</li>
+                    <li class="mb-3 d-flex align-items-center"><i class="fas fa-check-circle text-maroon me-3"></i> Individualized Attention & Mentorship</li>
+                    <li class="mb-3 d-flex align-items-center"><i class="fas fa-check-circle text-maroon me-3"></i> State-of-the-Art Science Laboratories</li>
+                    <li class="mb-3 d-flex align-items-center"><i class="fas fa-check-circle text-maroon me-3"></i> Secure & Peaceful Learning Environment</li>
+                </ul>
+                <button class="btn btn-maroon text-white px-5 py-3 rounded-pill shadow-lg">Learn About Our Culture</button>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Integrated Studies Section -->
+<section id="courses" class="py-24 bg-slate-50">
+    <div class="container">
+        <div class="text-center mb-16">
+            <h2 class="display-4 font-serif fw-bold section-title">Integrated Studies</h2>
+            <p class="text-muted max-w-2xl mx-auto">Our specialized curriculum bridges the gap between board exams and competitive entrance requirements.</p>
+        </div>
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="premium-card h-full p-8 bg-white rounded-3xl text-center">
+                    <div class="w-20 h-20 bg-maroon rounded-2xl flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-stethoscope text-white text-3xl"></i>
+                    </div>
+                    <h3 class="font-serif fw-bold mb-4 fs-2">NEET Integration</h3>
+                    <p class="text-muted">Rigorous medical entrance coaching integrated with plus-two syllabus, focus on Biology and Chemistry excellence.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="premium-card h-full p-8 bg-white rounded-3xl text-center scale-105 shadow-xl relative z-10">
+                    <div class="w-20 h-20 bg-gold rounded-2xl flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-atom text-white text-3xl"></i>
+                    </div>
+                    <h3 class="font-serif fw-bold mb-4 fs-2">Plus Two Science</h3>
+                    <p class="text-muted">Comprehensive coverage of Physics, Chemistry, Biology, and Mathematics with top-tier practical training.</p>
+                    <span class="badge bg-maroon absolute top-6 right-6 px-3 py-2">CORE</span>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="premium-card h-full p-8 bg-white rounded-3xl text-center">
+                    <div class="w-20 h-20 bg-maroon rounded-2xl flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-microchip text-white text-3xl"></i>
+                    </div>
+                    <h3 class="font-serif fw-bold mb-4 fs-2">JEE Integration</h3>
+                    <p class="text-muted">Advanced engineering entrance preparation focusing on conceptual clarity and problem-solving speed in Math and Physics.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Campus Section (Photo Placeholders) -->
+<section id="campus" class="py-24 bg-white">
+    <div class="container">
+        <div class="text-center mb-16">
+            <h2 class="display-4 font-serif fw-bold section-title">Infrastructure</h2>
+            <p class="text-muted">Modern facilities designed to foster curiosity and academic growth.</p>
+        </div>
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="rounded-3xl overflow-hidden shadow-lg h-80 group relative">
+                    <img src="{% static 'images/hero2.png' %}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" alt="Lab">
+                    <div class="absolute inset-0 bg-maroon/20 group-hover:bg-maroon/40 transition-colors"></div>
+                    <p class="absolute bottom-6 left-6 text-white font-bold text-xl">Science Laboratory</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="rounded-3xl overflow-hidden shadow-lg h-80 group relative">
+                    <img src="{% static 'images/classroom.png' %}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" alt="Classroom">
+                    <div class="absolute inset-0 bg-maroon/20 group-hover:bg-maroon/40 transition-colors"></div>
+                    <p class="absolute bottom-6 left-6 text-white font-bold text-xl">Modern Classroom</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="rounded-3xl overflow-hidden shadow-lg h-80 group relative">
+                    <img src="{% static 'images/hero1.png' %}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" alt="Entrance">
+                    <div class="absolute inset-0 bg-maroon/20 group-hover:bg-maroon/40 transition-colors"></div>
+                    <p class="absolute bottom-6 left-6 text-white font-bold text-xl">Campus Entrance</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Call to Action -->
+<section class="py-20 bg-maroon text-white text-center">
+    <div class="container max-w-4xl">
+        <h2 class="display-3 font-serif fw-bold mb-4">Ready to Begin Your Journey?</h2>
+        <p class="fs-4 mb-8 text-slate-200">Admissions are now open for the upcoming academic session. Visit our campus at Thazhapra, Cheruthuruthy for a personal tour.</p>
+        <div class="d-flex flex-wrap justify-content-center gap-4">
+            <a href="tel:+919876543210" class="btn btn-gold text-maroon px-5 py-3 rounded-pill fw-bold fs-5 hover:scale-105 transition-transform"><i class="fas fa-phone me-3"></i> Call Now</a>
+            <a href="https://wa.me/919876543210" class="btn btn-light px-5 py-3 rounded-pill fw-bold fs-5 hover:scale-105 transition-transform"><i class="fab fa-whatsapp me-3"></i> WhatsApp Enquiry</a>
+        </div>
+    </div>
+</section>
+
+<script>
+    // Smooth scroll reveal observer
+    const observerOptions = {
+        threshold: 0.1
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('animate-fade-in-up');
+            }
+        });
+    }, observerOptions);
+
+    document.querySelectorAll('.premium-card, section h2, section img').forEach(el => {
+        el.style.opacity = '0';
+        observer.observe(el);
+    });
+</script>
+{% endblock %}

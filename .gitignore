@@ -1,0 +1,12 @@
+*.pyc
+__pycache__/
+db.sqlite3
+.DS_Store
+.env
+static/images/hero1.png
+static/images/hero2.png
+static/images/hero3.png
+static/images/classroom.png
+# Keep generated images for proof of work, but usually we ignore static/ if they are large
+# Actually, the user might want them, so I'll only ignore the brain/ directory (which is automatic anyway)
+# I'll just keep it simple.
