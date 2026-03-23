@@ -171,21 +171,51 @@
             pointer-events: none;
         }
         @media (max-width: 768px) {
+            .brand-header {
+                width: 95%;
+                padding: 0.8rem 1rem;
+                top: 0.5rem;
+                gap: 0.8rem;
+                border-radius: 20px;
+                border: 1px solid rgba(255,255,255,0.1);
+            }
+            .brand-logo {
+                height: 40px !important;
+            }
+            .brand-title {
+                font-size: 1.6rem !important;
+                letter-spacing: 0.05rem;
+            }
+            .brand-subtitle {
+                font-size: 0.6rem !important;
+                letter-spacing: 0.2rem !important;
+                margin-top: -0.1rem;
+            }
             .carousel-item {
-                height: 80vh;
+                height: 90vh;
             }
             .carousel-caption {
-                top: 50%;
+                top: 60% !important;
+                width: 95% !important;
+                padding: 1.5rem 1rem !important;
+                border-radius: 1.5rem !important;
+                transform: translate(-50%, -40%) !important;
             }
             .display-1, .display-2, .display-3 {
-                font-size: 2.2rem !important;
+                font-size: 1.7rem !important;
             }
             .fs-4 {
-                font-size: 1rem !important;
+                font-size: 0.85rem !important;
             }
             .hero-btns {
                 flex-direction: column;
                 gap: 10px;
+                width: 100%;
+            }
+            .hero-btns .btn {
+                width: 100%;
+                padding: 0.7rem 1rem !important;
+                font-size: 0.95rem !important;
             }
         }
 
