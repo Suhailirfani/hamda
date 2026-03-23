@@ -39,7 +39,9 @@
     <style>
         :root {
             --qatar-maroon: #8D1B3D;
+            --qatar-maroon-gloss: linear-gradient(135deg, #8D1B3D 0%, #B01E4B 35%, #8D1B3D 70%, #6A142D 100%);
             --premium-gold: #D4AF37;
+            --offwhite-gloss: #FDFBF7;
             --cream: #F8F4E1;
         }
 
@@ -47,67 +49,103 @@
             font-family: 'Inter', sans-serif;
             scroll-behavior: smooth;
             overflow-x: hidden;
+            background-color: var(--offwhite-gloss);
         }
 
         .font-serif {
             font-family: 'Fredoka', serif;
         }
 
-        .bg-maroon { background-color: var(--qatar-maroon); }
+        .bg-maroon { 
+            background: var(--qatar-maroon-gloss); 
+        }
+
+        .bg-offwhite-gloss {
+            background: var(--offwhite-gloss);
+            position: relative;
+        }
+
+        .bg-offwhite-gloss::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: linear-gradient(180deg, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0) 100%);
+            pointer-events: none;
+            opacity: 0.4;
+        }
+
         .text-maroon { color: var(--qatar-maroon); }
+        .text-gold { color: var(--premium-gold); }
         .border-maroon { border-color: var(--qatar-maroon); }
+        .bg-gold { background-color: var(--premium-gold); }
 
-        .glass-nav {
-            background: rgba(141, 27, 61, 0.9);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-        }
-
-        .hero-section {
-            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1523050853063-bd8012fec21b?auto=format&fit=crop&q=80&w=2000');
-            background-size: cover;
-            background-position: center;
-            height: 100vh;
-            display: flex;
-            align-items: center;
-        }
-
-        .premium-card {
-            transition: all 0.3s ease;
-            border: 1px solid rgba(141, 27, 61, 0.1);
-        }
-
-        .premium-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(141, 27, 61, 0.15);
+        /* Glossy Glass Effect */
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);
         }
 
         .maroon-overlay {
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(141, 27, 61, 0.4); /* Light maroon shade */
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(rgba(106, 20, 45, 0.4), rgba(141, 27, 61, 0.6));
             z-index: 1;
         }
 
-        .carousel-item {
-            height: 100vh;
-            min-height: 500px;
-        }
-
+        .carousel-item { height: 100vh; min-height: 600px; }
         .carousel-caption {
             z-index: 2;
-            bottom: auto;
-            top: 55%; /* Slightly below center for better balance */
+            top: 50%;
             transform: translateY(-50%);
-            width: 100%;
-            left: 0;
-            right: 0;
-            padding: 0 15px;
+            bottom: auto;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 3rem;
+            border-radius: 2rem;
+            background: rgba(141, 27, 61, 0.25);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
         }
 
+        .btn-maroon {
+            background: var(--qatar-maroon-gloss);
+            border: none;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 4px 15px rgba(141, 27, 61, 0.3);
+        }
+
+        .btn-maroon:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 8px 25px rgba(141, 27, 61, 0.4);
+            filter: brightness(1.1);
+        }
+
+        .btn-gold {
+            background: linear-gradient(135deg, #D4AF37 0%, #B8860B 100%);
+            border: none;
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+        }
+
+        .card-premium {
+            background: white;
+            border: none;
+            border-radius: 1.5rem;
+            transition: all 0.4s ease;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            overflow: hidden;
+            border: 1px solid rgba(141, 27, 61, 0.05);
+        }
+
+        .card-premium:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(141, 27, 61, 0.1);
+        }
+        
         @media (max-width: 768px) {
             .carousel-item {
                 height: 80vh;

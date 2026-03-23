@@ -79,12 +79,16 @@
 </section>
 
 <!-- About Section -->
-<section id="about" class="py-24 bg-white">
+<section class="py-20 bg-offwhite-gloss" id="about">
     <div class="container">
         <div class="row align-items-center g-5">
             <div class="col-lg-6">
-                <div class="p-4 bg-slate-100 rounded-3xl overflow-hidden shadow-xl">
-                    <img src="{% static 'images/classroom.png' %}" alt="Students" class="img-fluid rounded-2xl w-full">
+                <div class="position-relative">
+                    <img src="{% static 'images/classroom.png' %}" class="img-fluid rounded-4 shadow-2xl card-premium" alt="Classroom">
+                    <div class="position-absolute bottom-0 start-0 bg-maroon text-white p-4 rounded-end-4 animate-fade-in-up glass-panel" style="margin-bottom: -20px; margin-left: -20px;">
+                        <span class="d-block fs-2 fw-bold">100%</span>
+                        <span class="fs-6">Female Environment</span>
+                    </div>
                 </div>
             </div>
             <div class="col-lg-6">
@@ -98,6 +102,35 @@
                     <li class="mb-3 d-flex align-items-center"><i class="fas fa-check-circle text-maroon me-3"></i> Secure & Peaceful Learning Environment</li>
                 </ul>
                 <button class="btn btn-maroon text-white px-5 py-3 rounded-pill shadow-lg">Learn About Our Culture</button>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Features Section -->
+<section class="py-20 bg-offwhite-gloss">
+    <div class="container text-center">
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="card-premium p-5 h-100">
+                    <i class="fas fa-microscope text-maroon fs-1 mb-4"></i>
+                    <h3 class="font-serif fw-bold mb-3">Modern Labs</h3>
+                    <p class="text-muted">State-of-the-art facilities for physics, chemistry, and biology experiments.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card-premium p-5 h-100">
+                    <i class="fas fa-graduation-cap text-maroon fs-1 mb-4"></i>
+                    <h3 class="font-serif fw-bold mb-3">Integrated Coaching</h3>
+                    <p class="text-muted">Simultaneous preparation for Board Exams and Entrance (NEET/JEE).</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card-premium p-5 h-100">
+                    <i class="fas fa-shield-heart text-maroon fs-1 mb-4"></i>
+                    <h3 class="font-serif fw-bold mb-3">Safe & Secure</h3>
+                    <p class="text-muted">Comprehensive student care with a fully residential female hostel.</p>
+                </div>
             </div>
         </div>
     </div>
