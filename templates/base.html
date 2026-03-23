@@ -171,35 +171,27 @@
             pointer-events: none;
         }
         @media (max-width: 768px) {
-            .brand-header {
-                width: 95%;
-                padding: 0.8rem 1rem;
-                top: 0.5rem;
-                gap: 0.8rem;
-                border-radius: 20px;
-                border: 1px solid rgba(255,255,255,0.1);
+            .brand-navbar {
+                padding: 0.4rem 1rem !important;
+                background: rgba(0,0,0,0.4) !important; /* Slightly darker for mobile readability */
+                backdrop-filter: blur(10px) !important;
+                -webkit-backdrop-filter: blur(10px) !important;
             }
             .brand-logo {
-                height: 40px !important;
+                height: 30px !important;
             }
-            .brand-title {
-                font-size: 1.6rem !important;
-                letter-spacing: 0.05rem;
-            }
-            .brand-subtitle {
-                font-size: 0.6rem !important;
-                letter-spacing: 0.2rem !important;
-                margin-top: -0.1rem;
+            .brand-letter {
+                height: 45px !important;
             }
             .carousel-item {
-                height: 90vh;
+                height: 85vh;
             }
             .carousel-caption {
-                top: 60% !important;
-                width: 95% !important;
-                padding: 1.5rem 1rem !important;
-                border-radius: 1.5rem !important;
-                transform: translate(-50%, -40%) !important;
+                top: 55% !important;
+                width: 92% !important;
+                padding: 1.2rem 1rem !important;
+                border-radius: 1.2rem !important;
+                transform: translate(-50%, -45%) !important;
             }
             .display-1, .display-2, .display-3 {
                 font-size: 1.7rem !important;
@@ -239,25 +231,27 @@
             animation: fadeInUp 1s ease forwards;
         }
 
-        /* Fixed Branding Header */
-        /* Top Branding (Static) */
-        .brand-header {
+        /* Glassy Top Navbar (Scrolls with page) */
+        .brand-navbar {
             position: absolute;
-            top: 1rem;
-            left: 50%;
-            transform: translateX(-50%);
-            z-index: 1050;
-            padding: 1.2rem 4rem;
-            border-radius: 100px;
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.15);
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 2000;
             display: flex;
             align-items: center;
-            gap: 2.5rem;
-            animation: fadeInDown 1.5s cubic-bezier(0.19, 1, 0.22, 1) forwards;
-            white-space: nowrap;
+            justify-content: space-between;
+            padding: 0.4rem 2.4rem;
+            background: transparent; 
+            backdrop-filter: none;
+            -webkit-backdrop-filter: none;
+            border-bottom: none;
+            transition: all 0.4s ease;
+        }
+
+        @keyframes slideDownNav {
+            from { transform: translateY(-100%); }
+            to { transform: translateY(0); }
         }
 
         .brand-logo {
@@ -292,9 +286,9 @@
             text-align: left;
         }
 
-        @keyframes fadeInDown {
-            from { opacity: 0; transform: translate(-50%, -60px); }
-            to { opacity: 1; transform: translate(-50%, 0); }
+        @keyframes fadeInSimple {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         /* Floating Social Links */
@@ -355,14 +349,20 @@
     {% block extra_css %}{% endblock %}
 </head>
 <body class="bg-slate-50">
-    <!-- Persistent Branding Header -->
-    <div class="brand-header border-0 bg-transparent shadow-none" style="top: 3rem;">
-        <img src="{% static 'favicon.png' %}" alt="Hamda Logo" class="brand-logo" style="height: 100px;">
-        <div class="d-flex flex-column align-items-start">
-            <h1 class="brand-title">hamda</h1>
-            <p class="brand-subtitle">SCIENCE ACADEMY</p>
+    <!-- Fixed Premium Navbar -->
+    <nav class="brand-navbar shadow-lg">
+        <div class="d-flex align-items-center gap-3">
+            <img src="{% static 'favicon.png' %}" alt="Hamda Logo" class="brand-logo" style="height: 40px;">
+            <img src="{% static 'images/hamda_letter.png' %}" alt="Hamda Science Academy" class="brand-letter" style="height: 65px; width: auto; filter: drop-shadow(0 4px 15px rgba(0,0,0,0.4));">
         </div>
-    </div>
+        
+        <!-- Navigation Links (Standard Navbar Behavior) -->
+        <div class="d-none d-lg-flex align-items-center gap-4 me-4">
+            <a href="#about" class="text-white text-decoration-none fw-medium opacity-75 hover:opacity-100 transition-opacity">About</a>
+            <a href="#curriculum" class="text-white text-decoration-none fw-medium opacity-75 hover:opacity-100 transition-opacity">Curriculum</a>
+            <a href="#contact" class="btn btn-maroon px-4 rounded-pill">Contact Us</a>
+        </div>
+    </nav>
 
     {% block content %}{% endblock %}
 
