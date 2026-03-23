@@ -159,7 +159,19 @@
             box-shadow: 0 20px 40px rgba(141, 27, 61, 0.1);
         }
         
-        @media (max-width: 768px) {
+        .bg-cta-glossy {
+            background: linear-gradient(135deg, #FFFFFF 0%, #8D1B3D 25%, #6A142D 60%, #000000 100%) !important;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .bg-cta-glossy::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: radial-gradient(circle at top right, rgba(255,255,255,0.2), transparent);
+            pointer-events: none;
+        }
             .carousel-item {
                 height: 80vh;
             }
