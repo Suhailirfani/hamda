@@ -98,14 +98,13 @@
         .carousel-item { height: 100vh; min-height: 600px; }
         .carousel-caption {
             z-index: 2;
-            top: 48%;
-            transform: translateY(-50%);
-            bottom: auto;
-            width: 90%;
-            max-width: 1000px;
+            top: 60%;
             left: 50%;
             right: auto;
-            transform: translate(-50%, -50%);
+            transform: translate(-50%, -20%);
+            bottom: auto;
+            width: 90%;
+            max-width: 1100px;
             padding: 4rem 2rem;
             border-radius: 2.5rem;
             background: rgba(141, 27, 61, 0.2);
@@ -160,7 +159,7 @@
         }
         
         .bg-cta-glossy {
-            background: linear-gradient(135deg, #FFFFFF 0%, #8D1B3D 25%, #6A142D 60%, #000000 100%) !important;
+            background: linear-gradient(135deg, #000B24 0%, #001F3F 15%, #8D1B3D 50%, #6A142D 100%) !important;
             position: relative;
             overflow: hidden;
         }
@@ -212,45 +211,45 @@
         }
 
         /* Fixed Branding Header */
+        /* Top Branding (Static) */
         .brand-header {
-            position: fixed;
-            top: 1.5rem;
+            position: absolute;
+            top: 2rem;
             left: 50%;
             transform: translateX(-50%);
             z-index: 1050;
-            padding: 0.6rem 2.5rem;
+            padding: 1.2rem 4rem;
             border-radius: 100px;
-            background: rgba(255, 255, 255, 0.08);
-            backdrop-filter: blur(25px) saturate(180%);
-            -webkit-backdrop-filter: blur(25px) saturate(180%);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            box-shadow: 0 12px 40px rgba(0,0,0,0.2);
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
             display: flex;
             align-items: center;
-            gap: 1rem;
-            animation: slideDownFade 1.2s cubic-bezier(0.19, 1, 0.22, 1) forwards;
+            gap: 2.5rem;
+            animation: fadeInDown 1.5s cubic-bezier(0.19, 1, 0.22, 1) forwards;
             white-space: nowrap;
         }
 
         .brand-logo {
-            height: 40px;
+            height: 80px;
             width: auto;
-            border-radius: 8px;
+            border-radius: 12px;
             object-fit: contain;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            filter: drop-shadow(0 4px 10px rgba(0,0,0,0.3));
         }
 
         .brand-title {
             color: white;
-            font-size: 1.4rem;
-            letter-spacing: 0.1rem;
+            font-size: 3.2rem;
+            letter-spacing: 0.2rem;
             margin: 0;
-            text-shadow: 0 2px 10px rgba(0,0,0,0.3);
-            font-weight: 600;
+            text-shadow: 0 4px 20px rgba(0,0,0,0.5);
+            font-weight: 700;
         }
 
-        @keyframes slideDownFade {
-            from { opacity: 0; transform: translate(-50%, -40px); }
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translate(-50%, -60px); }
             to { opacity: 1; transform: translate(-50%, 0); }
         }
     </style>
