@@ -11,7 +11,7 @@
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@700&family=Fredoka:wght@300..700&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     
@@ -257,9 +257,12 @@
 </head>
 <body class="bg-slate-50">
     <!-- Persistent Branding Header -->
-    <div class="brand-header">
-        <img src="{% static 'favicon.png' %}" alt="Hamda Logo" class="brand-logo shadow-lg">
-        <h1 class="brand-title font-serif text-white">HAMDA SCIENCE ACADEMY</h1>
+    <div class="brand-header border-0 bg-transparent shadow-none" style="top: 3rem;">
+        <img src="{% static 'favicon.png' %}" alt="Hamda Logo" class="brand-logo" style="height: 100px;">
+        <div class="d-flex flex-column align-items-start">
+            <h1 class="brand-title">hamda</h1>
+            <p class="brand-subtitle">SCIENCE ACADEMY</p>
+        </div>
     </div>
 
     {% block content %}{% endblock %}
