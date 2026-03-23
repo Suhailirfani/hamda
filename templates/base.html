@@ -98,18 +98,31 @@
         .carousel-item { height: 100vh; min-height: 600px; }
         .carousel-caption {
             z-index: 2;
-            top: 50%;
+            top: 48%;
             transform: translateY(-50%);
             bottom: auto;
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 3rem;
-            border-radius: 2rem;
-            background: rgba(141, 27, 61, 0.25);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+            width: 90%;
+            max-width: 1000px;
+            left: 50%;
+            right: auto;
+            transform: translate(-50%, -50%);
+            padding: 4rem 2rem;
+            border-radius: 2.5rem;
+            background: rgba(141, 27, 61, 0.2);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            box-shadow: 0 15px 50px rgba(0,0,0,0.3);
+        }
+
+        .carousel-caption h1, .carousel-caption h2 {
+            margin-bottom: 1.5rem !important;
+            letter-spacing: -0.02em;
+        }
+
+        .carousel-caption p {
+            margin-bottom: 2.5rem !important;
+            opacity: 0.9;
         }
 
         .btn-maroon {
