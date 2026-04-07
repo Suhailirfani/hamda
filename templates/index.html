@@ -21,7 +21,8 @@
                         <h1 class="display-2 font-serif fw-bold text-white">Developing <span class="text-gold">Scientific Minds</span></h1>
                         <p class="fs-4 text-slate-200">Excellence, Ethics, and Empowerment</p>
                         <div class="d-flex gap-3 hero-btns justify-content-center">
-                            <a href="#about" class="btn btn-maroon text-white px-5 py-3 rounded-pill fs-5 shadow-lg">Discover More</a>
+                            <a href="{% url 'admission_form' %}" class="btn btn-gold text-maroon px-5 py-3 rounded-pill fw-bold fs-5 shadow-lg">Apply Online</a>
+                            <a href="#about" class="btn btn-outline-light text-white px-5 py-3 rounded-pill fs-5 shadow-lg">Discover More</a>
                         </div>
                     </div>
                 </div>
@@ -34,7 +35,10 @@
                     <div class="animate-fade-in-up">
                         <h2 class="display-3 font-serif fw-bold text-white">Integrated <span class="text-gold">NEET & JEE</span> Success</h2>
                         <p class="fs-4 text-slate-200">Bridging the gap between board exams and competitive success.</p>
-                        <a href="#courses" class="btn btn-outline-light px-5 py-3 rounded-pill fs-5 shadow-lg">Our Programs</a>
+                        <div class="d-flex gap-3 hero-btns justify-content-center">
+                            <a href="{% url 'admission_form' %}" class="btn btn-maroon text-white px-5 py-3 rounded-pill fw-bold fs-5 shadow-lg">Admission Open</a>
+                            <a href="#courses" class="btn btn-outline-light px-5 py-3 rounded-pill fs-5 shadow-lg">Our Programs</a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -46,7 +50,7 @@
                     <div class="animate-fade-in-up">
                         <h2 class="display-3 font-serif fw-bold text-white">Safe & Secure <span class="text-gold">Campus</span></h2>
                         <p class="fs-4 text-slate-200">Thazhapra, Cheruthuruthy, Thrissur</p>
-                        <a href="#contact" class="btn btn-gold text-maroon px-5 py-3 rounded-pill fw-bold fs-5 shadow-lg">Join Our Academy</a>
+                        <a href="{% url 'admission_form' %}" class="btn btn-gold text-maroon px-5 py-3 rounded-pill fw-bold fs-5 shadow-lg">Join Our Academy</a>
                     </div>
                 </div>
             </div>
@@ -215,8 +219,9 @@
         <h2 class="display-3 font-serif fw-bold mb-4">Ready to Begin Your Journey?</h2>
         <p class="fs-4 mb-8 text-slate-200">Admissions are now open for the upcoming academic session. Visit our campus at Thazhapra, Cheruthuruthy for a personal tour.</p>
         <div class="d-flex flex-wrap justify-content-center gap-4">
+            <a href="{% url 'admission_form' %}" class="btn btn-maroon text-white px-5 py-3 rounded-pill fw-bold fs-5 shadow-lg hover:scale-105 transition-transform border border-white"><i class="fas fa-file-signature me-3"></i> Apply Online</a>
             <a href="tel:+919562744006" class="btn btn-gold text-maroon px-5 py-3 rounded-pill fw-bold fs-5 hover:scale-105 transition-transform"><i class="fas fa-phone me-3"></i> Call Now</a>
-            <a href="https://wa.me/919562844006" class="btn btn-light px-5 py-3 rounded-pill fw-bold fs-5 hover:scale-105 transition-transform"><i class="fab fa-whatsapp me-3"></i> WhatsApp Enquiry</a>
+            <a href="https://wa.me/919562844006" class="btn btn-light px-5 py-3 rounded-pill fw-bold fs-5 hover:scale-105 transition-transform"><i class="fab fa-whatsapp me-3"></i> Enquiry</a>
         </div>
     </div>
 </section>
