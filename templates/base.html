@@ -177,7 +177,7 @@
                 backdrop-filter: none !important;
                 -webkit-backdrop-filter: none !important;
                 box-shadow: none !important;
-                justify-content: center !important;
+                justify-content: space-between !important;
                 top: 0 !important;
             }
             .brand-navbar .d-flex {
@@ -364,12 +364,12 @@
             <img src="{% static 'images/hamda_letter.png' %}" alt="Hamda Science Academy" class="brand-letter" style="height: 65px; width: auto; filter: drop-shadow(0 4px 15px rgba(0,0,0,0.4));">
         </div>
         
-        <!-- Navigation Links (Standard Navbar Behavior) -->
-        <div class="d-none d-lg-flex align-items-center gap-4 me-4">
-            <a href="#about" class="text-white text-decoration-none fw-medium opacity-75 hover:opacity-100 transition-opacity">About</a>
-            <a href="#curriculum" class="text-white text-decoration-none fw-medium opacity-75 hover:opacity-100 transition-opacity">Curriculum</a>
-            <a href="#contact" class="btn btn-maroon px-4 rounded-pill">Contact Us</a>
-            <a href="{% url 'login' %}" class="btn btn-outline-light px-4 rounded-pill border-white text-white hover:bg-white hover:text-black transition-colors">Login</a>
+        <!-- Navigation Links -->
+        <div class="d-flex align-items-center gap-2 gap-lg-4 me-lg-4">
+            <a href="#about" class="d-none d-lg-flex text-white text-decoration-none fw-medium opacity-75 hover:opacity-100 transition-opacity">About</a>
+            <a href="#curriculum" class="d-none d-lg-flex text-white text-decoration-none fw-medium opacity-75 hover:opacity-100 transition-opacity">Curriculum</a>
+            <a href="#contact" class="d-none d-lg-flex btn btn-maroon px-4 rounded-pill">Contact Us</a>
+            <a href="{% url 'login' %}" class="btn btn-outline-light px-3 px-lg-4 py-1 py-lg-2 rounded-pill border-white text-white hover:bg-white hover:text-black transition-colors" style="font-size: 0.9rem;">Login</a>
         </div>
     </nav>
 
