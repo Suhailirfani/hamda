@@ -1,0 +1,120 @@
+{% extends 'base.html' %}
+
+{% block title %}Application Status - Hamda Science Academy{% endblock %}
+
+{% block extra_css %}
+<style>
+    .status-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: calc(100vh - 200px);
+        padding: 8rem 1rem 4rem;
+    }
+    .status-card {
+        background: white;
+        border-radius: 1.5rem;
+        padding: 3rem;
+        box-shadow: 0 20px 50px rgba(141, 27, 61, 0.08);
+        border: 1px solid rgba(141, 27, 61, 0.1);
+        width: 100%;
+        max-width: 600px;
+    }
+    .status-badge {
+        font-size: 1.1rem;
+        padding: 0.5rem 1.5rem;
+        border-radius: 2rem;
+        font-weight: 600;
+    }
+    .status-Pending { background: #ffeaa7; color: #d35400; }
+    .status-Received { background: #81ecec; color: #00cec9; }
+    .status-Enrolled { background: #55efc4; color: #00b894; }
+    .status-Rejected { background: #fab1a0; color: #d63031; }
+    
+    .detail-row {
+        display: flex;
+        justify-content: space-between;
+        padding: 1rem 0;
+        border-bottom: 1px solid #eee;
+    }
+    .detail-row:last-child {
+        border-bottom: none;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="status-container">
+    <div class="status-card">
+        <h2 class="font-serif fw-bold text-maroon text-center mb-4"><i class="fas fa-search me-2"></i>Check Application Status</h2>
+        
+        <form method="post" action="{% url 'admission_status' %}" class="mb-5 d-flex gap-2">
+            {% csrf_token %}
+            <input type="text" name="application_number" class="form-control form-control-lg bg-light border-0 px-4 rounded-pill" placeholder="Enter Application Number (e.g. H260401)" required {% if request.POST.application_number %}value="{{ request.POST.application_number }}"{% elif request.GET.app_no %}value="{{ request.GET.app_no }}"{% endif %}>
+            <button type="submit" class="btn btn-maroon px-4 rounded-pill fw-medium">Track</button>
+        </form>
+
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-danger rounded-3">{{ message }}</div>
+            {% endfor %}
+        {% endif %}
+
+        {% if searched and application %}
+            <div class="bg-light p-4 rounded-4 mt-4 border">
+                <div class="text-center mb-4">
+                    <span class="status-badge status-{{ application.status|cut:' ' }}">
+                        {{ application.status }}
+                    </span>
+                    <h4 class="mt-3 font-serif fw-bold">{{ application.name }}</h4>
+                    <p class="text-muted mb-0">{{ application.application_number }}</p>
+                </div>
+                
+                <div class="mt-4">
+                    <div class="detail-row">
+                        <span class="text-muted"><i class="fas fa-calendar-day me-2"></i>Date of Birth</span>
+                        <span class="fw-bold">{{ application.dob|date:"M d, Y"|default:"N/A" }}</span>
+                    </div>
+                     <div class="detail-row">
+                        <span class="text-muted"><i class="fas fa-id-card me-2"></i>Aadhar Number</span>
+                        <span class="fw-bold">{{ application.aadhar_number|default:"N/A" }}</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="text-muted"><i class="fas fa-phone me-2"></i>Phone</span>
+                        <span class="fw-bold">{{ application.phone }} {% if application.is_whatsapp_number %}<i class="fab fa-whatsapp text-success ms-1"></i>{% endif %}</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="text-muted"><i class="fas fa-map-marker-alt me-2"></i>Address</span>
+                        <span class="fw-bold text-end w-50">{{ application.address }}</span>
+                    </div>
+                    <h6 class="text-maroon fw-bold mt-4 mb-2 border-bottom pb-2">Academic Details</h6>
+                    <div class="detail-row">
+                        <span class="text-muted">Course Applied</span>
+                        <span class="fw-bold">{{ application.course.name }}</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="text-muted">Department</span>
+                        <span class="fw-bold">{{ application.section.name }}</span>
+                    </div>
+                    
+                    {% if application.interested_in_entrance_coaching %}
+                    <div class="detail-row">
+                        <span class="text-muted"><i class="fas fa-book-open me-2"></i>Entrance Coaching</span>
+                        <span class="fw-bold">Yes ({{ application.preferred_stream }}{% if application.preferred_stream == 'Others' %} - {{ application.other_stream }}{% endif %})</span>
+                    </div>
+                    {% endif %}
+                    
+                    <div class="detail-row">
+                        <span class="text-muted"><i class="fas fa-calendar-alt me-2"></i>Applied On</span>
+                        <span class="fw-bold">{{ application.created_at|date:"M d, Y" }}</span>
+                    </div>
+                </div>
+                
+                <div class="mt-4 text-center">
+                    <p class="small text-muted">If you have any questions, please contact our admission office.</p>
+                </div>
+            </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

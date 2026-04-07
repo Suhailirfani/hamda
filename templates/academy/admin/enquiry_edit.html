@@ -1,0 +1,172 @@
+{% extends 'base.html' %}
+
+{% block title %}Edit Application - {{ application.application_number }} - Hamda Science Academy{% endblock %}
+
+{% block extra_css %}
+<style>
+    .edit-container {
+        padding: 6rem 2rem 4rem;
+        min-height: calc(100vh - 200px);
+        display: flex;
+        justify-content: center;
+    }
+    .edit-card {
+        background: white;
+        border-radius: 1rem;
+        padding: 2.5rem;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        border: 1px solid #eee;
+        width: 100%;
+        max-width: 900px;
+    }
+    .panel-header {
+        border-bottom: 2px solid rgba(141, 27, 61, 0.1);
+        padding-bottom: 1rem;
+        margin-bottom: 2rem;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="edit-container">
+    <div class="edit-card">
+        <div class="panel-header d-flex justify-content-between align-items-center">
+            <div>
+                <a href="{% url 'admin_dashboard' %}" class="btn btn-sm btn-light text-muted mb-2"><i class="fas fa-arrow-left me-1"></i>Back to Dashboard</a>
+                <h3 class="font-serif fw-bold text-maroon m-0">Edit Application: {{ application.application_number }}</h3>
+            </div>
+            <div class="text-end">
+                <span class="text-muted small d-block">Applied On: {{ application.created_at|date:"M d, Y" }}</span>
+                <span class="badge bg-light text-dark border mt-1 fs-6">{{ application.status }}</span>
+            </div>
+        </div>
+        
+        <form method="post">
+            {% csrf_token %}
+            
+            <div class="row">
+                <!-- Administrative section -->
+                <div class="col-12 bg-light p-3 rounded-3 border border-warning mb-4">
+                    <h5 class="fw-bold mb-3 text-warning-emphasis"><i class="fas fa-clipboard-check me-2"></i>Status Management</h5>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label fw-medium">Application Status</label>
+                            <select name="status" class="form-select">
+                                {% for val, label in application.STATUS_CHOICES %}
+                                    <option value="{{ val }}" {% if application.status == val %}selected{% endif %}>{{ label }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            
+                <h5 class="fw-bold text-maroon mb-3 border-bottom pb-2">Student Information</h5>
+                <div class="col-md-6 mb-3">
+                    <label class="form-label fw-medium">Student Full Name</label>
+                    {{ form.name }}
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label class="form-label fw-medium">Date of Birth</label>
+                    {{ form.dob }}
+                </div>
+                
+                <div class="col-md-6 mb-3">
+                    <label class="form-label fw-medium">Father's/Guardian's Name</label>
+                    {{ form.fathers_name }}
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label class="form-label fw-medium">Aadhar Number</label>
+                    {{ form.aadhar_number }}
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <label class="form-label fw-medium">Mobile Number</label>
+                    {{ form.phone }}
+                    <div class="form-check mt-1">
+                        {{ form.is_whatsapp_number }}
+                        <label class="form-check-label small" for="{{ form.is_whatsapp_number.id_for_label }}">Is using WhatsApp</label>
+                    </div>
+                </div>
+                
+                <div class="col-md-6 mb-3">
+                    <label class="form-label fw-medium">Address</label>
+                    {{ form.address }}
+                </div>
+                
+                <h5 class="fw-bold text-maroon mb-3 border-bottom pb-2 mt-4">Academic Interests</h5>
+                <div class="col-md-6 mb-3">
+                    <label class="form-label fw-medium">Department</label>
+                    {{ form.section }}
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label class="form-label fw-medium">Course</label>
+                    {{ form.course }}
+                </div>
+                
+                <div class="col-md-12 mb-3 mt-2 bg-light p-3 rounded-3 border">
+                    <div class="form-check fw-medium text-maroon mb-2">
+                        {{ form.interested_in_entrance_coaching }}
+                        <label class="form-check-label" for="{{ form.interested_in_entrance_coaching.id_for_label }}">Interested in Entrance Coaching?</label>
+                    </div>
+                    <div class="row" id="entrance-fields" style="display: none;">
+                        <div class="col-md-6">
+                            <label class="form-label small">Preferred Stream</label>
+                            {{ form.preferred_stream }}
+                        </div>
+                        <div class="col-md-6" id="other-stream-container" style="display: none;">
+                            <label class="form-label small">Other Stream</label>
+                            {{ form.other_stream }}
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="mt-4 d-flex justify-content-end gap-3 border-top pt-4">
+                <a href="{% url 'admin_dashboard' %}" class="btn btn-light border px-4 rounded-pill">Cancel</a>
+                <button type="submit" class="btn btn-maroon px-4 rounded-pill fw-medium">Save Changes</button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+(function() {
+    'use strict';
+    document.addEventListener('DOMContentLoaded', function() {
+        const entranceCheckbox = document.getElementById('{{ form.interested_in_entrance_coaching.id_for_label }}');
+        const entranceFields = document.getElementById('entrance-fields');
+        const streamSelect = document.getElementById('{{ form.preferred_stream.id_for_label }}');
+        const otherStreamContainer = document.getElementById('other-stream-container');
+
+        function toggleEntranceFields() {
+            if (entranceCheckbox.checked) {
+                entranceFields.style.display = 'flex';
+            } else {
+                entranceFields.style.display = 'none';
+            }
+        }
+
+        function toggleOtherStream() {
+            if (streamSelect.value === 'Others') {
+                otherStreamContainer.style.display = 'block';
+            } else {
+                otherStreamContainer.style.display = 'none';
+            }
+        }
+
+        if (entranceCheckbox) {
+            toggleEntranceFields();
+            entranceCheckbox.addEventListener('change', toggleEntranceFields);
+        }
+
+        if (streamSelect) {
+            toggleOtherStream();
+            streamSelect.addEventListener('change', toggleOtherStream);
+        }
+    });
+})();
+</script>
+{% endblock %}

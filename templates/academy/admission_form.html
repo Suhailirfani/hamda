@@ -1,0 +1,231 @@
+{% extends 'base.html' %}
+
+{% block title %}New Admission - Hamda Science Academy{% endblock %}
+
+{% block extra_css %}
+<style>
+    .form-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: calc(100vh - 200px);
+        padding-top: 8rem;
+        padding-bottom: 4rem;
+    }
+    .admission-card {
+        width: 100%;
+        max-width: 800px;
+        background: white;
+        border-radius: 1.5rem;
+        padding: 2.5rem;
+        box-shadow: 0 20px 50px rgba(141, 27, 61, 0.08);
+        border: 1px solid rgba(141, 27, 61, 0.1);
+    }
+    .section-title {
+        color: var(--qatar-maroon);
+        font-weight: 600;
+        margin-top: 1.5rem;
+        margin-bottom: 1rem;
+        padding-bottom: 0.5rem;
+        border-bottom: 2px solid rgba(141, 27, 61, 0.1);
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="form-container">
+    <div class="admission-card">
+        <h2 class="font-serif fw-bold text-maroon mb-2"><i class="fas fa-graduation-cap me-2"></i>New Admission</h2>
+        <p class="text-secondary mb-4">Register a new prospective student application for Hamda Science Academy.</p>
+        
+        <form method="post">
+            {% csrf_token %}
+            
+            <h5 class="section-title">Personal Details</h5>
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label class="form-label fw-medium">Student Full Name <span class="text-danger">*</span></label>
+                    {{ form.name }}
+                    {% if form.name.errors %}<div class="text-danger small mt-1">{{ form.name.errors }}</div>{% endif %}
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label class="form-label fw-medium">Date of Birth</label>
+                    {{ form.dob }}
+                    {% if form.dob.errors %}<div class="text-danger small mt-1">{{ form.dob.errors }}</div>{% endif %}
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label class="form-label fw-medium">Father's/Guardian's Name <span class="text-muted small fw-normal">(Optional)</span></label>
+                    {{ form.fathers_name }}
+                    {% if form.fathers_name.errors %}<div class="text-danger small mt-1">{{ form.fathers_name.errors }}</div>{% endif %}
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label class="form-label fw-medium">Aadhar Number <span class="text-muted small fw-normal">(Optional)</span></label>
+                    {{ form.aadhar_number }}
+                    {% if form.aadhar_number.errors %}<div class="text-danger small mt-1">{{ form.aadhar_number.errors }}</div>{% endif %}
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label fw-medium">Full Address <span class="text-danger">*</span></label>
+                <div class="text-muted small mb-2"><i class="fas fa-info-circle me-1"></i>Please include: House Name, Place, PO, District</div>
+                {{ form.address }}
+                {% if form.address.errors %}<div class="text-danger small mt-1">{{ form.address.errors }}</div>{% endif %}
+            </div>
+
+            <h5 class="section-title">Contact Details</h5>
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label class="form-label fw-medium">Mobile Number <span class="text-danger">*</span></label>
+                    {{ form.phone }}
+                    {% if form.phone.errors %}<div class="text-danger small mt-1">{{ form.phone.errors }}</div>{% endif %}
+                </div>
+                <div class="col-md-6 mb-3 d-flex align-items-center mt-md-4">
+                    <div class="form-check text-success fw-medium">
+                        {{ form.is_whatsapp_number }}
+                        <label class="form-check-label" for="{{ form.is_whatsapp_number.id_for_label }}">
+                            <i class="fab fa-whatsapp"></i> Is this number using WhatsApp?
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <h5 class="section-title">Academic Interests</h5>
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label class="form-label fw-medium">Section/Department <span class="text-danger">*</span></label>
+                    {{ form.section }}
+                    {% if form.section.errors %}<div class="text-danger small mt-1">{{ form.section.errors }}</div>{% endif %}
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label class="form-label fw-medium">Interested Course <span class="text-danger">*</span></label>
+                    <select name="course" id="id_course" class="form-select" required>
+                        <option value="" selected>---------</option>
+                    </select>
+                    {% if form.course.errors %}<div class="text-danger small mt-1">{{ form.course.errors }}</div>{% endif %}
+                </div>
+            </div>
+
+            <div class="bg-light p-3 rounded-3 border mb-4">
+                <div class="form-check mb-3">
+                    {{ form.interested_in_entrance_coaching }}
+                    <label class="form-check-label fw-medium" for="{{ form.interested_in_entrance_coaching.id_for_label }}">
+                        Are you interested in Entrance Coaching?
+                    </label>
+                </div>
+                
+                <div id="entrance-fields" style="display: none;">
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label fw-medium">Preferred Stream</label>
+                            {{ form.preferred_stream }}
+                            {% if form.preferred_stream.errors %}<div class="text-danger small mt-1">{{ form.preferred_stream.errors }}</div>{% endif %}
+                        </div>
+                        <div class="col-md-6 mb-3" id="other-stream-container" style="display: none;">
+                            <label class="form-label fw-medium">Specify Other Stream</label>
+                            {{ form.other_stream }}
+                            {% if form.other_stream.errors %}<div class="text-danger small mt-1">{{ form.other_stream.errors }}</div>{% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="d-flex gap-2 mt-4">
+                <button type="submit" class="btn btn-maroon flex-grow-1 py-2 fw-medium">Submit Application</button>
+                <a href="{% url 'index' %}" class="btn btn-light border flex-grow-1 py-2 fw-medium">Cancel</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- Pass data to JS securely -->
+<script id="courses-data" type="application/json">
+    {{ courses_json|safe }}
+</script>
+
+{% endblock %}
+
+{% block extra_js %}
+<script>
+(function() {
+    'use strict';
+    document.addEventListener('DOMContentLoaded', function() {
+        // --- Course Dropdown Logic ---
+        const sectionSelect = document.getElementById('id_section');
+        const courseSelect = document.getElementById('id_course');
+        const coursesElement = document.getElementById('courses-data');
+        
+        if (sectionSelect && courseSelect && coursesElement) {
+            let coursesData = [];
+            try {
+                coursesData = JSON.parse(coursesElement.textContent);
+            } catch (e) {
+                console.error('Error parsing courses data', e);
+            }
+
+            const currentCourseVal = "{{ form.course.value|default_if_none:'' }}";
+            
+            function updateCourseOptions() {
+                const selectedSectionId = sectionSelect.value;
+                courseSelect.innerHTML = '<option value="" selected>---------</option>';
+                
+                if (selectedSectionId) {
+                    const filteredCourses = coursesData.filter(function(c) {
+                        return c.section_id.toString() === selectedSectionId.toString();
+                    });
+
+                    filteredCourses.forEach(function(course) {
+                        const option = document.createElement('option');
+                        option.value = course.id;
+                        option.textContent = course.name;
+                        if (course.id.toString() === currentCourseVal.toString()) {
+                            option.selected = true;
+                        }
+                        courseSelect.appendChild(option);
+                    });
+                }
+            }
+            updateCourseOptions();
+            sectionSelect.addEventListener('change', updateCourseOptions);
+        }
+
+        // --- Entrance Coaching Logic ---
+        const entranceCheckbox = document.getElementById('{{ form.interested_in_entrance_coaching.id_for_label }}');
+        const entranceFields = document.getElementById('entrance-fields');
+        const streamSelect = document.getElementById('{{ form.preferred_stream.id_for_label }}');
+        const otherStreamContainer = document.getElementById('other-stream-container');
+
+        function toggleEntranceFields() {
+            if (entranceCheckbox.checked) {
+                entranceFields.style.display = 'block';
+            } else {
+                entranceFields.style.display = 'none';
+                streamSelect.value = '';
+                toggleOtherStream();
+            }
+        }
+
+        function toggleOtherStream() {
+            if (streamSelect.value === 'Others') {
+                otherStreamContainer.style.display = 'block';
+            } else {
+                otherStreamContainer.style.display = 'none';
+                document.getElementById('{{ form.other_stream.id_for_label }}').value = '';
+            }
+        }
+
+        if (entranceCheckbox) {
+            toggleEntranceFields();
+            entranceCheckbox.addEventListener('change', toggleEntranceFields);
+        }
+
+        if (streamSelect) {
+            toggleOtherStream();
+            streamSelect.addEventListener('change', toggleOtherStream);
+        }
+    });
+})();
+</script>
+{% endblock %}

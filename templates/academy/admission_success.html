@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+
+{% block title %}Application Submitted - Hamda Science Academy{% endblock %}
+
+{% block extra_css %}
+<style>
+    .success-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: calc(100vh - 200px);
+        padding: 8rem 1rem 4rem;
+    }
+    .success-card {
+        background: white;
+        border-radius: 1.5rem;
+        padding: 4rem 3rem;
+        box-shadow: 0 20px 50px rgba(46, 204, 113, 0.1);
+        text-align: center;
+        max-width: 600px;
+        width: 100%;
+        border: 1px solid rgba(46, 204, 113, 0.2);
+    }
+    .success-icon {
+        font-size: 5rem;
+        color: #2ecc71;
+        margin-bottom: 1.5rem;
+    }
+    .app-number-box {
+        background: #f8f9fa;
+        border: 2px dashed var(--premium-gold);
+        padding: 1.5rem;
+        border-radius: 1rem;
+        margin: 2rem 0;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="success-container">
+    <div class="success-card animate-fade-in-up">
+        <i class="fas fa-check-circle success-icon"></i>
+        <h2 class="font-serif fw-bold text-maroon mb-3">Application Submitted Successfully!</h2>
+        
+        <p class="text-secondary fs-5">Thank you, <strong class="text-dark">{{ application.name }}</strong>. Your application for <strong class="text-dark">{{ application.course.name }}</strong> has been received.</p>
+        
+        <div class="app-number-box">
+            <h6 class="text-uppercase text-muted fw-bold mb-2">Your Application Number</h6>
+            <h1 class="display-4 fw-bold text-maroon mb-0" style="letter-spacing: 2px;">{{ app_no }}</h1>
+        </div>
+        
+        <div class="alert alert-warning text-start d-flex gap-3 align-items-center rounded-3 bg-cream border-gold">
+            <i class="fas fa-exclamation-triangle text-gold fs-4"></i>
+            <p class="mb-0 small">Please note down your application number or take a screenshot. You will need it to track your admission status.</p>
+        </div>
+        
+        <div class="mt-4 d-flex flex-wrap gap-3 justify-content-center">
+            {% if user.is_authenticated %}
+                <a href="{% url 'admin_dashboard' %}" class="btn btn-maroon text-white px-4 py-2 rounded-pill fw-medium shadow-sm"><i class="fas fa-columns me-2"></i>Dashboard</a>
+                <a href="{% url 'admission_form' %}" class="btn btn-outline-maroon text-maroon border-maroon border px-4 py-2 rounded-pill fw-medium transition-colors" style="border-width: 2px !important;"><i class="fas fa-plus me-2"></i>Submit Another</a>
+            {% else %}
+                <a href="{% url 'admission_status' %}?app_no={{ app_no }}" class="btn btn-gold text-white px-4 py-2 rounded-pill fw-medium">Check Status</a>
+                <a href="{% url 'index' %}" class="btn btn-outline-secondary px-4 py-2 rounded-pill fw-medium">Return to Home</a>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

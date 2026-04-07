@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block title %}Welcome - Hamda Science Academy{% endblock %}
+
+{% block extra_css %}
+<style>
+    .welcome-container {
+        padding: 8rem 2rem 4rem;
+        min-height: calc(100vh - 200px);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .welcome-card {
+        background: white;
+        border-radius: 1.5rem;
+        padding: 4rem;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        border: 1px solid #eee;
+        text-align: center;
+        max-width: 600px;
+        width: 100%;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="welcome-container">
+    <div class="welcome-card animate-fade-in-up">
+        <div class="mb-4 text-maroon" style="font-size: 4rem;">
+            <i class="fas fa-hand-sparkles"></i>
+        </div>
+        <h2 class="font-serif fw-bold text-maroon mb-3">Welcome, {{ user.username }}!</h2>
+        <p class="text-muted fs-5 mb-4">You are logged in as a <strong>{{ user.profile.get_role_display|default:"Staff" }}</strong>.</p>
+        
+        <div class="alert alert-light border rounded-3 p-3 mb-4 text-start">
+            <i class="fas fa-info-circle text-primary me-2"></i> Your role dashboard is currently under development. More features will be available soon!
+        </div>
+        
+        <a href="{% url 'logout' %}" class="btn btn-outline-danger rounded-pill px-4 py-2 mt-2">Logout</a>
+    </div>
+</div>
+{% endblock %}
