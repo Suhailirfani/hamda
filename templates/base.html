@@ -142,6 +142,18 @@
             box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
         }
 
+        .btn-outline-maroon {
+            color: var(--qatar-maroon) !important;
+            border: 2px solid var(--qatar-maroon) !important;
+            background: transparent !important;
+            transition: all 0.3s ease !important;
+        }
+
+        .btn-outline-maroon:hover {
+            background: var(--qatar-maroon) !important;
+            color: white !important;
+        }
+
         .card-premium {
             background: white;
             border: none;
@@ -366,10 +378,14 @@
         
         <!-- Navigation Links -->
         <div class="d-flex align-items-center gap-2 gap-lg-4 me-lg-4">
-            <a href="#about" class="d-none d-lg-flex text-white text-decoration-none fw-medium opacity-75 hover:opacity-100 transition-opacity">About</a>
-            <a href="#curriculum" class="d-none d-lg-flex text-white text-decoration-none fw-medium opacity-75 hover:opacity-100 transition-opacity">Curriculum</a>
-            <a href="#contact" class="d-none d-lg-flex btn btn-maroon px-4 rounded-pill">Contact Us</a>
-            <a href="{% url 'login' %}" class="btn btn-outline-light px-3 px-lg-4 py-1 py-lg-2 rounded-pill border-white text-white hover:bg-white hover:text-black transition-colors" style="font-size: 0.9rem;">Login</a>
+            <a href="/#about" class="d-none d-lg-flex text-maroon text-decoration-none fw-medium opacity-75 hover:opacity-100 transition-opacity">About</a>
+            <a href="/#curriculum" class="d-none d-lg-flex text-maroon text-decoration-none fw-medium opacity-75 hover:opacity-100 transition-opacity">Curriculum</a>
+            <a href="/#contact" class="d-none d-lg-flex btn btn-maroon px-4 rounded-pill">Contact Us</a>
+            {% if user.is_authenticated %}
+                <a href="{% url 'logout' %}" class="btn btn-outline-maroon px-3 px-lg-4 py-1 py-lg-2 rounded-pill fw-bold hover:bg-maroon hover:text-white transition-all shadow-sm" style="font-size: 0.9rem; border-width: 2px;"><i class="fas fa-sign-out-alt me-1"></i> Logout</a>
+            {% else %}
+                <a href="{% url 'login' %}" class="btn btn-outline-maroon px-3 px-lg-4 py-1 py-lg-2 rounded-pill fw-bold hover:bg-maroon hover:text-white transition-all shadow-sm" style="font-size: 0.9rem; border-width: 2px;"><i class="fas fa-sign-in-alt me-1"></i> Login</a>
+            {% endif %}
         </div>
     </nav>
 
