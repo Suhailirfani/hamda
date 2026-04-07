@@ -3,9 +3,10 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login as auth_login, logout as auth_logout
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
 from .decorators import role_required
-from .models import Course, AdmissionApplication, WhatsAppTemplate
-from .forms import AdmissionApplicationForm, WhatsAppTemplateForm
+from .models import Course, AdmissionApplication, WhatsAppTemplate, UserProfile
+from .forms import AdmissionApplicationForm, WhatsAppTemplateForm, StaffUserCreationForm
 import json
 import urllib.parse
 
@@ -84,11 +85,11 @@ def custom_logout(request):
 def redirect_user_based_on_role(user):
     """Helper to route user to correct dashboard"""
     if user.is_superuser:
-        return redirect('admin_dashboard')
+        return redirect('main_dashboard')
     
     if hasattr(user, 'profile'):
         if user.profile.role in ['superadmin', 'admin', 'office_staff']:
-            return redirect('admin_dashboard')
+            return redirect('main_dashboard')
             
     return redirect('welcome_dashboard')
 
@@ -98,7 +99,20 @@ def welcome_dashboard(request):
     return render(request, 'academy/admin/welcome.html')
 
 @role_required(['superadmin', 'admin', 'office_staff'])
-def admin_dashboard_view(request):
+def main_admin_dashboard_view(request):
+    """Primary Landing Dashboard for Staff"""
+    total_applications = AdmissionApplication.objects.count()
+    pending_applications = AdmissionApplication.objects.filter(status='Pending').count()
+    enrolled_students = AdmissionApplication.objects.filter(status='Enrolled').count()
+    
+    return render(request, 'academy/admin/main_dashboard.html', {
+        'total_applications': total_applications,
+        'pending_applications': pending_applications,
+        'enrolled_students': enrolled_students,
+    })
+
+@role_required(['superadmin', 'admin', 'office_staff'])
+def admission_dashboard_view(request):
     """List View for Applications"""
     status_filter = request.GET.get('status', '')
     query = AdmissionApplication.objects.all()
@@ -120,7 +134,7 @@ def admin_dashboard_view(request):
             
         app.whatsapp_url = f"https://wa.me/91{app.phone.replace('+91', '').replace(' ', '')}?text={urllib.parse.quote(msg)}"
         
-    return render(request, 'academy/admin/dashboard.html', {
+    return render(request, 'academy/admin/admission_dashboard.html', {
         'applications': query,
         'status_filter': status_filter
     })
@@ -134,7 +148,7 @@ def enquiry_update_view(request, app_id):
         if form.is_valid():
             form.save()
             messages.success(request, 'Application updated successfully.')
-            return redirect('admin_dashboard')
+            return redirect('admission_dashboard')
     else:
         form = AdmissionApplicationForm(instance=application)
         
@@ -150,7 +164,7 @@ def enquiry_delete_view(request, app_id):
     if request.method == 'POST':
         application.delete()
         messages.success(request, 'Application deleted successfully.')
-    return redirect('admin_dashboard')
+    return redirect('admission_dashboard')
 
 @role_required(['superadmin', 'admin', 'office_staff'])
 def enquiry_update_status_view(request, app_id):
@@ -164,7 +178,7 @@ def enquiry_update_status_view(request, app_id):
             messages.success(request, f'Status for application {application.application_number} updated to {new_status}.')
         else:
             messages.error(request, 'Invalid status selected.')
-    return redirect('admin_dashboard')
+    return redirect('admission_dashboard')
 
 @role_required(['superadmin', 'admin'])
 def whatsapp_template_edit_view(request):
@@ -178,10 +192,36 @@ def whatsapp_template_edit_view(request):
         if form.is_valid():
             form.save()
             messages.success(request, 'WhatsApp template updated successfully.')
-            return redirect('admin_dashboard')
+            return redirect('admission_dashboard')
     else:
         form = WhatsAppTemplateForm(instance=template_obj)
         
     return render(request, 'academy/admin/whatsapp_template_edit.html', {
+        'form': form
+    })
+
+@role_required(['superadmin'])
+def user_management_list_view(request):
+    """View to list all users, only accessible by superadmin."""
+    # Exclude superusers from the list if desired, but good to see them.
+    # Actually, the requirement just said "Superadmin creation should be restricted". 
+    users = User.objects.select_related('profile').all().order_by('-date_joined')
+    return render(request, 'academy/admin/user_list.html', {
+        'users': users
+    })
+
+@role_required(['superadmin'])
+def user_management_create_view(request):
+    """View to create users with specific roles, only accessible by superadmin."""
+    if request.method == 'POST':
+        form = StaffUserCreationForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            messages.success(request, f'User {user.username} created successfully with role {user.profile.get_role_display()}.')
+            return redirect('user_list')
+    else:
+        form = StaffUserCreationForm()
+        
+    return render(request, 'academy/admin/user_create.html', {
         'form': form
     })

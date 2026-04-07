@@ -13,13 +13,16 @@ urlpatterns = [
     path('logout/', views.custom_logout, name='logout'),
     
     # Admin Panel
-    path('panel/', views.admin_dashboard_view, name='admin_dashboard'),
+    path('panel/', views.main_admin_dashboard_view, name='main_dashboard'),
+    path('panel/admissions/', views.admission_dashboard_view, name='admission_dashboard'),
     path('panel/enquiry/<int:app_id>/edit/', views.enquiry_update_view, name='enquiry_edit'),
     path('panel/enquiry/<int:app_id>/status/', views.enquiry_update_status_view, name='enquiry_update_status'),
     path('panel/enquiry/<int:app_id>/delete/', views.enquiry_delete_view, name='enquiry_delete'),
     
-    # Settings
+    # Settings & User Management
     path('panel/settings/whatsapp/', views.whatsapp_template_edit_view, name='whatsapp_template_edit'),
+    path('panel/users/', views.user_management_list_view, name='user_list'),
+    path('panel/users/create/', views.user_management_create_view, name='user_create'),
     
     # Welcome fallback
     path('welcome/', views.welcome_dashboard, name='welcome_dashboard'),
